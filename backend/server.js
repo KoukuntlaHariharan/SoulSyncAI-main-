@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import session from "express-session"; // Import Session
-import RedisStore from "connect-redis"; // Import Redis Store adapter
+import { RedisStore } from "connect-redis"; // Import Redis Store adapter
 import { connectDB } from "./config/database.js";
-import { redisClient } from "./utils/redis_client.js"; // Import your new Redis Client
+import redisClient from "./utils/redis_client.js"; // Import your new Redis Client
 
 import authRoutes from "./routes/auth_routes.js";
 import chatRoutes from "./routes/chat_routes.js";
