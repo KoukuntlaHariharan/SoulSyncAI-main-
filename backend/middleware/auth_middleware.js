@@ -1,17 +1,13 @@
-import jwt from "jsonwebtoken";
-import { ENV } from "../config/env.js";
-import User from "../models/User.js";
-
-export const protect = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) return res.status(401).json({ message: "No token provided" });
-
-    const decoded = jwt.verify(token, ENV.JWT_SECRET);
-    req.user = await User.findById(decoded.id).select("-password");
-
-    next();
-  } catch (err) {
-    res.status(401).json({ message: "Invalid token" });
+export const protect = (req, res, next) => {
+  // 1. Check if the session exists and has a user attached
+  // express-session (with Redis) automatically populates req.session
+  if (!req.session || !req.session.user) {
+    return res.status(401).json({ message: "Not authorized, please login" });
   }
+
+  // 2. Attach the user to the request object for controllers to use
+  // We don't need to query MongoDB here! The user data is already in Redis/Session.
+  req.user = req.session.user;
+
+  next();
 };
