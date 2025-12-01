@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — UnmuteMind</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+
+  <body class="comic-body">
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- EMOJI BACKDROP -->
+    <div class="emoji-bg">
+      <span>😀</span><span>🥺</span><span>🤯</span><span>😢</span
+      ><span>😡</span> <span>😴</span><span>😳</span><span>🤩</span
+      ><span>😌</span><span>😂</span> <span>😭</span><span>🥲</span
+      ><span>😤</span><span>😇</span><span>😬</span> <span>🫠</span
+      ><span>😮‍💨</span><span>🥰</span><span>😱</span><span>🤔</span>
+    </div>
+
+    <div class="comic-auth-page">
+      <div class="comic-auth-card">
+        <!-- Back to Home -->
+        <div class="comic-top-bar">
+          <a href="./landing.html" class="comic-back-home-link">← Back Home</a>
+        </div>
+
+        <!-- Logo + Title -->
+        <div class="comic-auth-header">
+          <img
+            src="../assets/images/logo.png"
+            class="comic-auth-logo"
+            alt="logo"
+          />
+          <h2 class="comic-title">Login</h2>
+          <p class="comic-tag">Unmute your world 🎙️</p>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm" onsubmit="return false">
+          <label for="loginId">Email or Username</label>
+          <input
+            id="loginId"
+            type="text"
+            placeholder="example@mail.com"
+            required
+          />
+
+          <label for="loginPassword">Password</label>
+          <div class="password-wrapper">
+            <input id="loginPassword" type="password" required />
+            <span
+              class="toggle-password"
+              onclick="togglePassword('loginPassword', this)"
+              >👁️</span
+            >
+          </div>
+
+          <button class="comic-btn-primary">Login</button>
+
+          <a href="#" class="comic-forgot-fixed">Forgot Password?</a>
+        </form>
+
+        <!-- LINKS -->
+        <div class="comic-login-links-row">
+          <a href="./signup.html">Create Account</a>
+          <a href="./chat-guest.html?guest=true">Continue as Guest</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- SCRIPTS -->
+    <script type="module">
+      import { loadComponents } from "../scripts/utils.js";
+      loadComponents();
+    </script>
+
+    <script type="module" src="../scripts/auth.js"></script>
+  </body>
+</html>

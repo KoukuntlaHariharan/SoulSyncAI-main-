@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UnmuteMind — Guest Chat</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- Guest mode banner -->
+    <div class="guest-banner">
+      You are chatting as <strong>Guest</strong>. Messages are not saved.
+    </div>
+
+    <div class="guest-limit-counter">
+      Messages left: <strong id="guestMessagesLeft">5</strong>
+    </div>
+
+    <main style="max-width: 900px; margin: 20px auto">
+      <div class="chat-area">
+        <div class="conversation" id="guestConversation"></div>
+
+        <div class="composer">
+          <textarea
+            id="guestMessage"
+            placeholder="Talk to UnmuteMind..."
+          ></textarea>
+          <button class="btn-primary" id="guestSendBtn">Send</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- LIMIT REACHED POPUP -->
+    <div id="guestLimitPopup" class="chat-popup hidden">
+      <div class="chat-popup-box">
+        <h3>Limit reached</h3>
+        <p>Create an account to continue chatting!</p>
+        <button id="guestLimitClose" class="btn-primary">OK</button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script type="module">
+      import { loadComponents } from "../scripts/utils.js";
+      import { setupGuestChat } from "../scripts/guest_chat.js";
+
+      loadComponents();
+      setupGuestChat();
+    </script>
+  </body>
+</html>

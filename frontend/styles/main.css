@@ -1,0 +1,1061 @@
+/* =========================================================
+   UNMUTEMIND – PROFESSIONAL LIGHT GREY THEME
+   (Global Theme + Chat + Comic Auth Pages)
+========================================================= */
+
+/* =========================================================
+   THEME VARIABLES (LIGHT + DARK)
+========================================================= */
+:root {
+    /* Professional palette */
+    --bg: #f0f2f5;
+    --panel: #ffffff;
+    --text: #1c1c1c;
+    --text-muted: #555;
+    --border: #dcdcdc;
+
+    /* Brand accents */
+    --accent: #5EA3F5;
+    --accent-2: #90CCFF;
+
+    /* Utility */
+    --glass: rgba(255, 255, 255, 0.65);
+}
+
+.theme-dark {
+    --bg: #0f1724;
+    --panel: #0b1220;
+    --text: #e6eef8;
+    --text-muted: #9aa4b2;
+    --border: rgba(255, 255, 255, 0.1);
+    --glass: rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================================
+   GLOBAL BASE
+========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, Arial;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   CHAT LAYOUT (CHATGPT-STYLE)
+========================================================= */
+.app-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr 260px;
+    gap: 28px;
+    padding: 26px;
+}
+
+.side,
+.right-rail {
+    background: var(--panel);
+    padding: 20px;
+    border-radius: 22px;
+    border: 1px solid var(--border);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    height: calc(100vh - 52px);
+    overflow-y: auto;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    background: var(--panel);
+    padding: 14px 22px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.search input {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #f7f7f7;
+    color: var(--text);
+}
+
+/* ================= CHAT AREA ================= */
+.chat-area {
+    background: var(--panel);
+    border-radius: 22px;
+    height: calc(100vh - 180px);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.conversation {
+    flex: 1;
+    padding: 40px 45px;
+    overflow-y: auto;
+}
+
+/* ================= BUBBLES ================= */
+.msg {
+    display: flex;
+    margin-bottom: 18px;
+}
+
+.msg.user {
+    justify-content: flex-end;
+}
+
+.msg.assistant {
+    justify-content: flex-start;
+}
+
+.bubble {
+    max-width: 70%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.bubble-user {
+    background: #e7f1ff;
+    color: #003366;
+    border-bottom-right-radius: 6px;
+    box-shadow: 0 2px 9px rgba(0, 60, 150, 0.1);
+}
+
+.bubble-assistant {
+    background: #f9f9f9;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-bottom-left-radius: 6px;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.08);
+}
+
+.chat-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+}
+
+.chat-popup.hidden {
+    display: none;
+}
+
+.chat-popup-box {
+    background: var(--panel);
+    padding: 22px;
+    width: 320px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.chat-popup-actions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-card {
+    background: #fafafa;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.history-card:hover {
+    background: #f0f2f5;
+}
+
+.delete-chat-btn {
+    display: none;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: 0.2s;
+}
+
+.history-card:hover .delete-chat-btn {
+    display: inline;
+}
+
+.delete-chat-btn:hover {
+    opacity: 1;
+}
+
+.history-card {
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.history-card:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+/* Guest Mode Banner */
+.guest-banner {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #001a33;
+    padding: 12px 22px;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-radius: 0 0 12px 12px;
+}
+
+.guest-limit-counter {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+/* ================= COMPOSER ================= */
+.composer {
+    display: flex;
+    gap: 12px;
+    padding: 18px 22px;
+    background: var(--panel);
+    border-radius: 18px;
+    border: 1px solid var(--border);
+}
+
+.composer textarea {
+    flex: 1;
+    padding: 12px 14px;
+    background: #f7f7f7;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    resize: none;
+    color: var(--text);
+}
+
+.composer textarea:focus {
+    background: #fff;
+    border-color: var(--accent);
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #4c93e8;
+}
+
+.btn-ghost {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+}
+
+/* =========================================================
+   LOGIN + SIGNUP (COMIC CARD LOOK, PROFESSIONAL COLORS)
+========================================================= */
+
+/* GLOBAL AUTH BG */
+.comic-body {
+    background: #f0f2f5;
+    min-height: 100vh;
+}
+
+/* EMOJI BACKDROP */
+.emoji-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.emoji-bg span {
+    position: absolute;
+    opacity: 0.22;
+    animation: floatEmoji 10s ease infinite;
+}
+
+@keyframes floatEmoji {
+    0% {
+        transform: translateY(0);
+        opacity: 0.18;
+    }
+
+    50% {
+        transform: translateY(-18px);
+        opacity: 0.24;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 0.18;
+    }
+}
+
+/* CENTER CONTAINER */
+.comic-auth-page {
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* AUTH CARD */
+.comic-auth-card {
+    width: 420px;
+    padding: 32px;
+    background: white;
+    border-radius: 22px;
+    border: 2px solid #e3e3e3;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 20;
+}
+
+/* BACK TO HOME LINK */
+.comic-top-bar {
+    margin-bottom: 10px;
+}
+
+.comic-back-home-link {
+    font-size: 14px;
+    color: #1c1c1c;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.comic-back-home-link:hover {
+    color: black;
+}
+
+/* HEADER */
+.comic-auth-logo {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 10px;
+}
+
+.comic-auth-header {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.comic-title {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.comic-tag {
+    color: #555;
+    font-size: 15px;
+}
+
+/* INPUTS */
+.comic-auth-card label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1c1c1c;
+    margin-bottom: 6px;
+}
+
+.comic-auth-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: #f7f7f7;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+}
+
+.comic-auth-card input:focus {
+    background: white;
+    border-color: var(--accent);
+}
+
+/* SUBMIT BUTTON */
+.comic-btn-primary {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.comic-btn-primary:hover {
+    background: #4c93e8;
+}
+
+/* FORGOT PASSWORD BELOW SUBMIT */
+.comic-forgot-fixed {
+    display: block;
+    margin-top: 12px;
+    text-align: center;
+    color: #444;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.comic-forgot-fixed:hover {
+    text-decoration: underline;
+}
+
+/* BOTTOM LINKS ROW */
+.comic-login-links-row {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comic-login-links-row a {
+    color: #1c1c1c;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.comic-login-links-row a:hover {
+    text-decoration: underline;
+}
+
+.comic-links {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comic-links a {
+    color: #1c1c1c;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.comic-links a:hover {
+    text-decoration: underline;
+}
+
+/* SIGNUP ROWS */
+.comic-row {
+    display: flex;
+    gap: 12px;
+}
+
+.comic-col {
+    flex: 1;
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0.6;
+    transition: 0.2s ease;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 1000px) {
+    .app-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .side,
+    .right-rail {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .comic-auth-card {
+        width: 90%;
+    }
+}
+
+/* =========================================================
+   GLOBAL NAVBAR (Shared across all pages)
+========================================================= */
+.um-global-navbar {
+    background: var(--panel);
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-logo {
+    width: 38px;
+    height: 38px;
+}
+
+.nav-brand {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-link {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.nav-btn-primary {
+    padding: 8px 16px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-icon {
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    cursor: pointer;
+}
+
+.nav-brand {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.nav-brand:hover {
+    opacity: 0.9;
+}
+
+/* =========================================================
+   SIDEBAR — ChatGPT 2024 Style
+========================================================= */
+.sidebar {
+    background: var(--panel);
+    padding: 22px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.new-chat-btn {
+    width: 100%;
+    padding: 12px;
+    font-weight: 700;
+    background: var(--accent);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 18px;
+}
+
+.sidebar-section-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.6px;
+}
+
+/* ChatGPT 2024 padded chat cards */
+.history-card {
+    background: #fafafa;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.history-card:hover {
+    background: #f0f2f5;
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   GLOBAL FOOTER (Common on all pages)
+========================================================= */
+.um-global-footer {
+    margin-top: 50px;
+    background: var(--panel);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+}
+
+.um-global-footer p {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* =========================================================
+   PROFILE PAGE
+========================================================= */
+
+.profile-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.profile-card {
+    background: var(--panel);
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 14px;
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.profile-email {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.profile-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 20px 0;
+}
+
+.profile-info-box {
+    background: #fafafa;
+    border: 1px solid var(--border);
+    padding: 18px;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.profile-info-box label {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.profile-info-box p {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Logout Button */
+.logout-btn {
+    background: #ff4b4b;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.logout-btn:hover {
+    background: #e63d3d;
+}
+
+.profile-top-bar {
+    margin-bottom: 15px;
+}
+
+.profile-back-link {
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text);
+    background: #f0f2f5;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: inline-block;
+    transition: 0.2s ease;
+}
+
+.profile-back-link:hover {
+    background: #e5e7eb;
+}
+
+/* =========================================================
+   GLOBAL DARK THEME — UnmuteMind (ALL PAGES)
+========================================================= */
+
+/* Override core variables for dark mode */
+.theme-dark {
+    --bg: #0f1724;
+    --panel: #101a2d;
+    --text: #f3f6ff;
+    --text-muted: #c5d2e8;
+    --border: #1f2a40;
+    --accent: #6EA7FF;
+    --accent-2: #90CCFF;
+}
+
+/* Smooth transitions */
+body {
+    transition: background 0.35s ease, color 0.35s ease;
+}
+
+/* =========================================================
+   GLOBAL TEXT COLORS (bright mode)
+========================================================= */
+.theme-dark *,
+.theme-dark p,
+.theme-dark span,
+.theme-dark label,
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark h4,
+.theme-dark a {
+    color: var(--text) !important;
+}
+
+/* Muted text */
+.theme-dark .text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* =========================================================
+   NAVBAR (ALL PAGES)
+========================================================= */
+.theme-dark .um-global-navbar,
+.theme-dark .navbar {
+    background: var(--panel);
+    border-bottom-color: var(--border);
+}
+
+.theme-dark .nav-link {
+    color: var(--text) !important;
+}
+
+.theme-dark .nav-btn-primary {
+    background: var(--accent);
+    color: #001a33 !important;
+}
+
+.theme-dark .nav-icon {
+    background: #152036;
+    border-color: #263250;
+    color: var(--text);
+}
+
+/* =========================================================
+   SIDEBAR (Chat Left Panel)
+========================================================= */
+.theme-dark .sidebar {
+    background: var(--panel);
+    border-color: var(--border);
+}
+
+.theme-dark .new-chat-btn {
+    background: var(--accent) !important;
+}
+
+.theme-dark .history-card {
+    background: #152036;
+    border-color: #263250;
+    color: var(--text);
+}
+
+.theme-dark .history-card:hover {
+    background: #1d2a44;
+}
+
+/* =========================================================
+   CHAT AREA (Center)
+========================================================= */
+.theme-dark .chat-area {
+    background: var(--panel);
+    border-color: var(--border);
+}
+
+/* assistant bubble */
+.theme-dark .bubble-assistant {
+    background: #152036;
+    border-color: #263250;
+    color: #f3f6ff;
+}
+
+/* user bubble */
+.theme-dark .bubble-user {
+    background: #203559;
+    color: #ffffff;
+}
+
+/* composer */
+.theme-dark .composer {
+    background: var(--panel);
+    border-color: var(--border);
+}
+
+.theme-dark .composer textarea {
+    background: #1b2638;
+    border-color: #2c3b55;
+    color: white;
+}
+
+/* =========================================================
+   RIGHT RAIL (Chat right panel)
+========================================================= */
+.theme-dark .right-rail {
+    background: var(--panel);
+    border-color: var(--border);
+    color: var(--text);
+}
+
+/* =========================================================
+   LOGIN / SIGNUP — Comic Auth Pages
+========================================================= */
+
+/* Dark comic background */
+.theme-dark .comic-body {
+    background: #0f1724;
+}
+
+/* Card */
+.theme-dark .comic-auth-card {
+    background: #101a2d;
+    border-color: #1f2a40;
+    color: var(--text);
+}
+
+/* Inputs */
+.theme-dark .comic-auth-card input {
+    background: #1b2638;
+    border-color: #2c3b55;
+    color: #fff;
+}
+
+/* Input placeholders */
+.theme-dark .comic-auth-card input::placeholder {
+    color: #cdd8e5 !important;
+    opacity: 1;
+}
+
+/* Label text */
+.theme-dark .comic-auth-card label {
+    color: #e7edff !important;
+}
+
+/* Titles */
+.theme-dark .comic-title {
+    color: #f7f9ff !important;
+}
+
+.theme-dark .comic-tag {
+    color: #c7d4e7 !important;
+}
+
+/* Back home link */
+.theme-dark .comic-back-home-link {
+    color: #dfe9ff !important;
+}
+
+.theme-dark .comic-back-home-link:hover {
+    color: white !important;
+}
+
+/* =========================================================
+   LANDING PAGE
+========================================================= */
+.theme-dark .um-landing-container {
+    background: var(--bg);
+}
+
+/* Hero heading */
+.theme-dark .um-hero h1 {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Tagline */
+.theme-dark .um-hero-tagline {
+    color: var(--text-muted) !important;
+}
+
+/* Feature Cards */
+.theme-dark .um-feature-card {
+    background: #101a2d;
+    border-color: #1f2a40;
+    color: var(--text);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Buttons */
+.theme-dark .um-btn-primary-lg {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #001a33;
+}
+
+.theme-dark .um-btn-ghost-lg {
+    background: #101a2d;
+    border: 1px solid #2c3b55;
+    color: var(--text);
+}
+
+/* Footer */
+.theme-dark .um-footer {
+    background: #0b1220;
+    border-color: #1f2a40;
+}
+
+.theme-dark .um-footer-bottom {
+    color: #9aa4b2;
+}
+
+/* =========================================================
+   PROFILE PAGE
+========================================================= */
+.theme-dark .profile-card {
+    background: var(--panel);
+    border-color: var(--border);
+}
+
+.theme-dark .profile-info-box {
+    background: #152036;
+    border-color: #263250;
+}
+
+.theme-dark .profile-name {
+    color: #f5f7ff !important;
+}
+
+.theme-dark .profile-email {
+    color: #cbd6ec !important;
+}
+
+/* Logout button */
+.theme-dark .logout-btn {
+    background: #e63d3d !important;
+    color: white;
+}
+
+/* =========================================================
+   GLOBAL BUTTONS
+========================================================= */
+.theme-dark .btn-primary,
+.theme-dark .comic-btn-primary {
+    background: var(--accent) !important;
+    color: #001a33 !important;
+}
+
+.theme-dark .btn-ghost {
+    background: #152036;
+    border-color: #263250;
+    color: var(--text);
+}
+
+/* =========================================================
+   GLOBAL LINKS
+========================================================= */
+.theme-dark a {
+    color: var(--accent) !important;
+}
+
+/* =========================================================
+   FOOTER (shared across all pages)
+========================================================= */
+.theme-dark .um-global-footer {
+    background: #0b1220;
+    border-color: #1f2a40;
+}
+
+.theme-dark .um-global-footer p {
+    color: var(--text-muted);
+}

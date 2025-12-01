@@ -1,0 +1,70 @@
+SoulSync/
+│
+├── frontend/
+│   ├── pages/
+│   │   ├── landing.html      
+│   │   ├── login.html
+│   │   ├── signup.html
+│   │   ├── chat.html
+│   │   ├── chat-guest.html
+│   │   └── profile.html
+│   │
+│   ├── components/
+│   │   ├── navbar.html
+│   │   ├── sidebar.html
+│   │   ├── footer.html
+│   │   └── chat-bubble.html
+│   │
+│   ├── styles/
+│   │   ├── main.css
+│   │   └── landing.css
+│   │
+│   ├── scripts/
+│   │   ├── app.js
+│   │   ├── api.js
+│   │   ├── auth.js
+│   │   ├── profile.js
+│   │   └── utils.js
+│   │
+│   └── assets/
+│       ├── images/
+│       └── icons/
+│
+├── backend/
+│   ├── server.js                 ← Entry point
+│   │
+│   ├── config/                   ← Env + DB connection
+│   │   ├── env.js
+│   │   └── database.js
+│   │
+│   ├── models/                   ← Mongo Schemas
+│   │   ├── User.js
+│   │   └── Chat.js
+│   │
+│   ├── controllers/              ← Auth + Chat logic
+│   │   ├── auth_controller.js
+│   │   └── chat_controller.js
+│   │
+│   ├── routes/                   ← API Endpoints
+│   │   ├── auth_routes.js
+│   │   └── chat_routes.js
+│   │
+│   ├── middleware/               ← Just auth & error
+│   │   ├── auth_middleware.js
+│   │   └── error_middleware.js
+│   │
+│   └── utils/                    ← helper functions
+│   │   ├── helpers.js
+│   │   └── gemini_client.js
+│   │
+│   ├── package.json
+│   ├── .env
+│   └── README.md
+│
+├── docs/
+│   ├── api-documentation.md
+│   ├── architecture.md
+│   ├── prompt-design.md
+│   └── ml-flow.md
+│
+└── README.md

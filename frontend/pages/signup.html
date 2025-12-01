@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up — UnmuteMind</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+
+  <body class="comic-body">
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- EMOJI BACKDROP -->
+    <div class="emoji-bg">
+      <span>😀</span><span>🥺</span><span>🤯</span><span>😢</span
+      ><span>😡</span> <span>😴</span><span>😳</span><span>🤩</span
+      ><span>😌</span><span>😂</span> <span>😭</span><span>🥲</span
+      ><span>😤</span><span>😇</span><span>😬</span> <span>🫠</span
+      ><span>😮‍💨</span><span>🥰</span><span>😱</span><span>🤔</span>
+    </div>
+
+    <div class="comic-auth-page">
+      <div class="comic-auth-card">
+        <!-- Back to Home -->
+        <div class="comic-top-bar">
+          <a href="./landing.html" class="comic-back-home-link">← Back Home</a>
+        </div>
+
+        <!-- Logo + Title -->
+        <div class="comic-auth-header">
+          <img
+            src="../assets/images/logo.png"
+            class="comic-auth-logo"
+            alt="logo"
+          />
+          <h2 class="comic-title">Sign Up</h2>
+          <p class="comic-tag">Create your UnmuteMind account 💛</p>
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <form id="signupForm" onsubmit="return false">
+          <label for="signupEmail">Email</label>
+          <input id="signupEmail" type="email" required />
+
+          <div class="comic-row">
+            <div class="comic-col">
+              <label for="signupFname">First Name</label>
+              <input id="signupFname" type="text" required />
+            </div>
+            <div class="comic-col">
+              <label for="signupLname">Last Name</label>
+              <input id="signupLname" type="text" />
+            </div>
+          </div>
+
+          <div class="comic-row">
+            <div class="comic-col">
+              <label for="signupDob">Date of Birth</label>
+              <input id="signupDob" type="date" />
+            </div>
+            <div class="comic-col">
+              <label for="signupUsername">Username</label>
+              <input id="signupUsername" type="text" required />
+            </div>
+          </div>
+
+          <label for="signupPassword">Password</label>
+          <div class="password-wrapper">
+            <input id="signupPassword" type="password" required />
+            <span
+              class="toggle-password"
+              onclick="togglePassword('signupPassword', this)"
+              >👁️</span
+            >
+          </div>
+
+          <button class="comic-btn-primary">Sign Up</button>
+        </form>
+
+        <div class="comic-links">
+          <a href="./login.html">Already have an account? Login</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script type="module">
+      import { loadComponents } from "../scripts/utils.js";
+      import "../scripts/auth.js";
+
+      loadComponents();
+    </script>
+  </body>
+</html>

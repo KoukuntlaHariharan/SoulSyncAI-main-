@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UnmuteMind — Converse. Reflect. Grow.</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/landing.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar"></div>
+
+  <!-- HERO -->
+  <main class="um-landing-container">
+
+    <section class="um-hero">
+      <h1>Unmute Your Mind.</h1>
+      <p class="um-hero-tagline">
+        A space where your thoughts feel heard — guided by a mindful, empathetic AI.
+      </p>
+
+      <div class="um-hero-cta">
+        <a id="landingMainBtn" class="um-btn-primary-lg">Loading...</a>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="um-feature-grid">
+
+      <div class="um-feature-card">
+        <h3>Emotion-Aware</h3>
+        <p>Understand not just what you say, but how you feel.</p>
+      </div>
+
+      <div class="um-feature-card">
+        <h3>Mindful Reflection</h3>
+        <p>Guided prompts help bring clarity and calm to your thoughts.</p>
+      </div>
+
+      <div class="um-feature-card">
+        <h3>Private & Secure</h3>
+        <p>Your inner world belongs to you. Fully protected, always.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <script type="module">
+    import { loadComponents } from "../scripts/utils.js";
+    loadComponents();
+  </script>
+  <script type="module" src="../scripts/landing.js"></script>
+
+
+</body>
+</html>

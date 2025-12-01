@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Profile — UnmuteMind</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <div class="profile-container">
+      
+      <div class="profile-top-bar">
+        <a href="./chat.html" class="profile-back-link">← Back to Chat</a>
+      </div>
+
+      <div class="profile-card">
+
+        <!-- Avatar -->
+        <img
+          src="../assets/images/logo.png"
+          class="profile-avatar"
+          alt="Profile"
+        />
+
+        <!-- Basic Info -->
+        <h2 class="profile-name" id="profileName">User Name</h2>
+        <p class="profile-email" id="profileEmail">email@example.com</p>
+
+        <!-- Grid Info Boxes -->
+        <div class="profile-info-grid">
+          <div class="profile-info-box">
+            <label>Username</label>
+            <p id="profileUsername">unmute_user</p>
+          </div>
+
+          <div class="profile-info-box">
+            <label>Account Created</label>
+            <p id="profileCreated">—</p>
+          </div>
+        </div>
+
+        <!-- THEME TOGGLE -->
+        <div class="theme-toggle-box">
+          <span>Dark Mode</span>
+
+          <label class="theme-switch" for="themeToggle">
+            <input type="checkbox" id="themeToggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- LOGOUT BUTTON -->
+        <button class="logout-btn" id="logoutBtn">Log Out</button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- SCRIPTS -->
+    <script type="module">
+      import { loadComponents } from "../scripts/utils.js";
+      import { setupProfilePage } from "../scripts/profile.js";
+
+      loadComponents().then(() => {
+        setupProfilePage(); // runs AFTER navbar/footer load
+      });
+    </script>
+  </body>
+</html>

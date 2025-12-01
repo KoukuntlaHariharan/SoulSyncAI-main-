@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UnmuteMind — Chat</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <div class="app-grid">
+      <!-- SIDEBAR -->
+      <div id="sidebar"></div>
+
+      <!-- MAIN CHAT AREA -->
+      <main class="main">
+        <div class="chat-area">
+          <div class="conversation" id="conversation"></div>
+
+          <div class="composer">
+            <textarea
+              id="userInput"
+              placeholder="Talk to UnmuteMind..."
+            ></textarea>
+            <button class="btn-primary" onclick="sendMessage()">Send</button>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT RAIL -->
+      <aside class="right-rail">
+        <h3>Insights</h3>
+        <p style="margin-top: 10px; color: var(--text-muted)">
+          Coming soon: emotional patterns, thought summaries, mindful hints.
+        </p>
+      </aside>
+    </div>
+
+    <div id="chatPopup" class="chat-popup hidden">
+      <div class="chat-popup-box">
+        <h3>Name your chat</h3>
+        <input
+          id="chatNameInput"
+          type="text"
+          placeholder="e.g., Morning Reflection"
+        />
+
+        <div class="chat-popup-actions">
+          <button id="createChatBtn" class="btn-primary">Create</button>
+          <button id="cancelChatBtn" class="btn-ghost">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="deleteChatPopup" class="chat-popup hidden">
+      <div class="chat-popup-box">
+        <h3>Delete chat?</h3>
+        <p>This action cannot be undone.</p>
+
+        <div class="chat-popup-actions">
+          <button
+            id="confirmDeleteBtn"
+            class="btn-primary"
+            style="background: #ff4b4b"
+          >
+            Delete
+          </button>
+          <button id="cancelDeleteBtn" class="btn-ghost">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script type="module">
+      import { loadComponents } from "../scripts/utils.js";
+      import { loadUserChats, loadChat, setupDeleteChatPopup, setupChatBindings } from "../scripts/chat.js";
+      import { sendMessage } from "../scripts/app.js";
+
+      // load components (navbar, sidebar, footer), then initialise chats
+      loadComponents().then(async () => {
+        // after components loaded, ensure sidebar bindings are set
+        setupChatBindings();
+        setupDeleteChatPopup();
+        await loadUserChats();
+
+        // restore last active chat if any
+        const lastChat = localStorage.getItem("activeChatId");
+        if (lastChat) {
+          loadChat(lastChat);
+        }
+      });
+
+      // wire send button + enter key
+      window.sendMessage = sendMessage;
+      document.getElementById("sendBtn").addEventListener("click", sendMessage);
+      document.getElementById("userInput").addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+    </script>
+  </body>
+</html>
